@@ -2,7 +2,7 @@
   <head>
     <title>Betica Shop</title>
     <meta charset="utf-8">
-    <meta name="author" content="YOUR NAME">
+    <meta name="author" content="Juvindle C Tina">
   </head>
   <body>
     <div id="content"></div>
@@ -50,7 +50,90 @@
        
       // enter your code here
       // render the items in the info using native Javascript or jQuery
-
+      $("#content").css({
+		"width":"350px",
+		"height":"600px",
+		"border":"3px solid black",
+		"border-radius":"40px",
+		"background":"gray",
+		"font-family": "Helvetica"
+	});
+	 var mainheight = $("#content").height() * .80;
+	 var mainwidth = $("#content").width() * .80;
+	 var productwidth = mainwidth * .75;
+	 var headerheight = mainheight * .10;
+	 var header2height = mainheight * .08;
+	 var smallheaderheight = mainheight * .05;
+	 var bodyheight = mainheight * .77;
+	 var date = new Date();
+	 var dateHeader = date.getHours() + " : " + date.getMinutes();
+     var str = "<center><div style='width: 0px;height: 0px;position: absolute;top: 18px;";
+     str += "left: 181px;border: 6px solid;border-radius: 20px;'></div><div style=";
+     str += "'width: 44px;height: 10px;position: absolute;top: 37px;left: 163px;";
+	 str += "border: 3px solid;border-radius: 10px;'></div>";
+	 str += "<div style='height:"+mainheight+"px;width:";//start main div
+	 str += mainwidth+"px;background: #fff;margin-top: 49px;border:2px solid;'>";
+	 str += "<div style='height:"+smallheaderheight+"px;background: #d9f4f9;'>";//start small header
+	 str += "<div style='width: 30%;float: left;padding: 6px;font-size: 10px;'>";
+	 str += "<div style='width: 0px;height: 0px;border: 4px solid;border-radius: 20px;";
+	 str += "float: left;'></div><div style='width: 0px;height: 0px;border: 4px solid;";
+	 str += "border-radius: 20px;float: left;'></div><div style='width: 0px;height: 0px;";
+	 str += "border: 4px solid;border-radius: 20px;float: left;'></div><div style='width:";
+	 str += " 6px;height: 6px;border: 1px solid;border-radius: 11px;float: left;'></div>";
+	 str += "<div style='width: 6px;height: 6px;border: 1px solid;border-radius: 11px;";
+	 str += "float: left;'></div><span style='float: left;position: relative;top: -2px;";
+	 str += "left: 2px;'>ABC</span></div><div style='font-size:13px;padding:3px;width: 40%;'>";
+	 str += dateHeader+"</div><span style='position: absolute;top: 65px;left: 302px;'>";
+	 str += "<img src='battery.jpg' width='20px'></span>"
+	 str += "</div>"; // end small header
+	 str += "<div style='height:"+header2height+"px;border-top:2px solid;";//start header for the betica shop
+	 str += "border-bottom:2px solid'>";
+	 str += "<span style='font-size:35px'>";
+	 str += "BETICA SHOP</span>"
+	 str += "</div>";//end header for the betica shop
+	 str += "<div style='height:"+bodyheight+"px;overflow:auto;'>";//start body of the betica shop
+	 str += "<div id='phonedisplayDiv' style='margin-top:10px;'>";//start phone display
+	 str += "<div id='phoneHeader' style='font-size: 16px;font-weight: 600;'>PHONES</div>";
+	 for(var cnt=0; cnt<info.items.phone.length; cnt++){
+		var phoneproduct = info.items.phone[cnt]['product'];
+		var phonemanufacturer = info.items.phone[cnt]['manufacturer'];
+		var phonereleasedate = info.items.phone[cnt]['releaseDate'];
+		var phoneprice = info.items.phone[cnt]['price'];
+		str += "<div style='width:"+productwidth+"px;border:2px solid;";
+		str += "border-radius:14px;margin-top:10px;'>";
+		str += "<div style='border-bottom:2px solid;padding:10px;'>"+phoneproduct+"</div>";
+		str += "<div style='padding:10px;font-size:12px'><div>Manufactured by "+phonemanufacturer;
+		str += ", to be released in "+phonereleasedate+"</div></div><div style='width: 62px;";
+		str += "padding: 5px;border: 2px solid;margin-bottom: 10px;box-shadow: 3px 3px 1px #000000'";
+		str += ">$ "+phoneprice+"</div></div>";
+	 }
+	 str += "</div>";//end phone display
+	 str += "<div id='laptopdisplayDiv' style='margin-top:10px;'>";//start laptop display
+	 str += "<div id='laptopHeader' style='font-size: 16px;font-weight: 600;'>LAPTOPS</div>";
+	 for(var cnt2=0; cnt2<info.items.laptop.length; cnt2++){
+		var laptopproduct = info.items.laptop[cnt2]['product'];
+		var laptopmanufacturer = info.items.laptop[cnt2]['manufacturer'];
+		var laptopreleasedate = info.items.laptop[cnt2]['releaseDate'];
+		var laptopprice = info.items.laptop[cnt2]['price'];
+		str += "<div style='width:"+productwidth+"px;border:2px solid;";
+		str += "border-radius:14px;margin-top:10px;'>";
+		str += "<div style='border-bottom:2px solid;padding:10px;'>"+laptopproduct+"</div>";
+		str += "<div style='padding:10px;font-size:12px;'><div>Manufactured by "+laptopmanufacturer;
+		str += ", to be released in "+laptopreleasedate+"</div></div><div style='width: 62px;";
+		str += "padding: 5px;border: 2px solid;margin-bottom: 10px;box-shadow: 3px 3px 1px #000000'";
+		str += ">$ "+laptopprice+"</div></div>";
+	 }
+	 str += "</div>";//end laptop display
+	 str += "<div>";//start laptop display
+	 str += "</div>";//end laptop display
+	 str += "</div>";//end body of the betica shop
+	 str += "<div style='height:"+header2height+"px;border-top:2px solid'><table style='";//start copyright
+	 str += "margin-left: auto;margin-right: auto;margin: 9px auto;'>";
+	 str += "<tr><td>COPYRIGHT &#169; </td>";
+	 str += "<td>2014</td></tr></table></div>";//end copyright
+	 str += "</div><div style='height: 45px;width: 45px;";
+	 str += "border: 3px double;margin-top: 10px;border-radius: 25px;'></div></center>";//end of main div
+	$("#content").html(str);
     </script>
 </body>
 </html>
