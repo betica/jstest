@@ -1,11 +1,31 @@
+<!doctype html>
 <html>
   <head>
     <title>Betica Shop</title>
     <meta charset="utf-8">
-    <meta name="author" content="YOUR NAME">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Carlette Jean Alon-Alon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
-  <body>
-    <div id="content"></div>
+  <body class="bg-dark">
+    <div id="content">
+      <header>
+        <nav class="navbar navbar-dark bg-dark justify-content-center text-uppercase fixed-top border-bottom border-light">
+          <span class="navbar-brand h1">Betica Shop</span>
+        </nav>
+      </header>
+
+      <div class="row justify-content-center">
+        <main class="mb-5 mt-4 pt-5 col-sm-8 col-md-6 col-lg-4"></main>
+      </div>
+
+      <footer>
+        <div class="bg-dark text-light small fixed-bottom border-top border-light py-1 px-5">
+          <a class="text-light float-right" href="#">Back to Top</a>
+          <span>&copy 2018</span>
+        </div>
+      </footer>
+    </div>
     <script type="text/javascript">
       var info = {
         "items": {
@@ -80,6 +100,83 @@
       // enter your code here
       // render the items in the info using native Javascript or jQuery
 
+      function category(categoryCode, categoryTitle) {
+        var headingText = document.createTextNode(categoryTitle);
+        var heading = document.createElement("p");
+        heading.setAttribute("class", "h3 text-light text-center text-uppercase");
+        heading.appendChild(headingText);
+
+        var alertText = document.createTextNode("No available item.");
+        var alertDiv = document.createElement("div");
+        alertDiv.setAttribute("id", "alert" + categoryCode);
+        alertDiv.setAttribute("class", "alert alert-danger text-center my-3");
+        alertDiv.appendChild(alertText);
+
+        var div = document.createElement("div");
+        div.setAttribute("id", categoryCode);
+        div.setAttribute("class", "container");
+        div.appendChild(heading);
+        div.appendChild(alertDiv);
+
+        var main = document.getElementsByTagName("main");
+        main[0].appendChild(div);
+
+        return div;
+      }
+
+      for (var categoryCode in info.items) {
+        if (manufacturer = info.items[categoryCode].manufacturer) {
+          //If Manufacturer property exists, it will be treated as an item rather than a category
+          var cardHeaderText = document.createTextNode(info.items[categoryCode].title);
+          var cardHeader = document.createElement("div");
+          cardHeader.setAttribute("class", "card-header h4 text-center");
+          cardHeader.appendChild(cardHeaderText);
+
+          var card = document.createElement("div");
+          card.setAttribute("class", "card my-3");
+          card.appendChild(cardHeader);
+          
+          if (!(div = document.getElementById(info.items[categoryCode].parent))) {
+            //If Category doesn't exist, list item to Others
+            if (!(div = document.getElementById("others"))) {
+              //Create Others Category if it doesn't exist
+              var div = new category("others", "others");
+            }
+
+            if (child = document.getElementById("alertothers")) {
+              //If the Others Category has an item, remove the initial message for no available item
+              div.removeChild(child);
+            }
+          } else {
+            //List item to the parent Category
+            if (child = document.getElementById("alert" + info.items[categoryCode].parent)) {
+              //If the Category has an item, remove the initial message for no available item
+              div.removeChild(child);
+            }
+          }
+
+          var cardText = document.createTextNode("Manufactured by " + manufacturer + ", to be released in " + new Date(info.items[categoryCode].releaseDate).getFullYear());
+          var cardBodyText = document.createElement("p");
+          cardBodyText.setAttribute("class", "card-text text-justify");
+          cardBodyText.appendChild(cardText);
+
+          var cardButtonText = document.createTextNode('$' + info.items[categoryCode].price.toLocaleString('en'));
+          var cardButton = document.createElement("button");
+          cardButton.setAttribute("class", "btn btn-dark");
+          cardButton.appendChild(cardButtonText);
+
+          var cardBody = document.createElement("div");
+          cardBody.setAttribute("class", "card-body text-center");
+          cardBody.appendChild(cardBodyText);
+          cardBody.appendChild(cardButton);
+
+          card.appendChild(cardBody);
+          div.appendChild(card);
+        } else {
+          //Creates new Category
+          new category(categoryCode, info.items[categoryCode].title);
+        }
+      }
     </script>
-</body>
+  </body>
 </html>
